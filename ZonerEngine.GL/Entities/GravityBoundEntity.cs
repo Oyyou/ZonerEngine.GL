@@ -56,6 +56,7 @@ namespace ZonerEngine.GL.Entities
     private bool _wallJumping = false;
     private bool _onGround = false;
     private bool _onWall = false;
+    private float _wallJumpDirection = 0;
 
     private float _wallJumpTimer = 0f;
     private float _wallJumpSpeed = 0f;
@@ -99,17 +100,20 @@ namespace ZonerEngine.GL.Entities
 
       var speed = 3f;
 
-      if (GameKeyboard.IsKeyDown(Keys.A))
+      if (!_wallJumping)
       {
-        velocity.X = -speed;
-      }
-      else if (GameKeyboard.IsKeyDown(Keys.D))
-      {
-        velocity.X = speed;
-      }
-      else
-      {
-        velocity.X = 0;
+        if (GameKeyboard.IsKeyDown(Keys.A))
+        {
+          velocity.X = -speed;
+        }
+        else if (GameKeyboard.IsKeyDown(Keys.D))
+        {
+          velocity.X = speed;
+        }
+        else
+        {
+          velocity.X = 0;
+        }
       }
 
       if (jump)
@@ -148,7 +152,7 @@ namespace ZonerEngine.GL.Entities
           _jumping = false;
         }
 
-        velocity.X += 5f;
+        velocity.X += (5f * _wallJumpDirection);
       }
 
       _onGround = false;
@@ -209,6 +213,9 @@ namespace ZonerEngine.GL.Entities
         {
           _onWall = true;
           _wallJumping = false;
+          if (entityCollisionRectangle.Left > originalCollisionRectangle.Left)
+            _wallJumpDirection = -1f;
+          else _wallJumpDirection = 1f;
         }
       }
 

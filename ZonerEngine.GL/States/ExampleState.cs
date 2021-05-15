@@ -33,10 +33,17 @@ namespace ZonerEngine.GL.States
       _entities.Add(new BasicEntity(block, new Vector2(160, 160)));
       _entities.Add(new BasicEntity(block, new Vector2(160, 200)));
 
-      _entities.Add(new BasicEntity(block, new Vector2(200, 200)));
-      _entities.Add(new BasicEntity(block, new Vector2(240, 200)));
-      _entities.Add(new BasicEntity(block, new Vector2(280, 200)));
-      _entities.Add(new BasicEntity(block, new Vector2(320, 200)));
+      _entities.Add(new BasicEntity(block, new Vector2(200, 320)));
+      _entities.Add(new BasicEntity(block, new Vector2(240, 320)));
+      _entities.Add(new BasicEntity(block, new Vector2(280, 320)));
+      _entities.Add(new BasicEntity(block, new Vector2(320, 320)));
+
+      _entities.Add(new BasicEntity(block, new Vector2(360, 0)));
+      _entities.Add(new BasicEntity(block, new Vector2(360, 40)));
+      _entities.Add(new BasicEntity(block, new Vector2(360, 80)));
+      _entities.Add(new BasicEntity(block, new Vector2(360, 120)));
+      _entities.Add(new BasicEntity(block, new Vector2(360, 160)));
+      _entities.Add(new BasicEntity(block, new Vector2(360, 200)));
       //var rectangles = new Dictionary<Vector2, List<Rectangle>>();
       //var otherRects = new List<List<Rectangle>>();
       //foreach (var entity in _entities)

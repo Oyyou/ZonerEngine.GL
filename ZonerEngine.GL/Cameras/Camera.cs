@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 
-namespace ZonerEngine.GL.Camera
+namespace ZonerEngine.GL.Cameras
 {
   public class Camera
   {

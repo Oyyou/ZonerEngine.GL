@@ -28,7 +28,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Camera\" />
+    <Folder Include="Cameras\" />
     <Folder Include="Components\" />
     <Folder Include="Entities\" />
     <Folder Include="Models\" />
