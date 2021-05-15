@@ -26,14 +26,17 @@ namespace ZonerEngine.GL.States
       _entities.Add(new GravityBoundEntity(block, new Vector2(200, 100)));
       //_entities.Add(new BasicEntity(Content.Load<Texture2D>("Block"), new Vector2(60, 300)));
       //_entities.Add(new BasicEntity(Content.Load<Texture2D>("Block"), new Vector2(100, 300)));
-      _entities.Add(new BasicEntity(block, new Vector2(200, 200)));
-      _entities.Add(new BasicEntity(block, new Vector2(200, 300)));
-      _entities.Add(new BasicEntity(block, new Vector2(250, 300)));
-      _entities.Add(new BasicEntity(block, new Vector2(300, 300)));
-      _entities.Add(new BasicEntity(block, new Vector2(340, 260)));
-      _entities.Add(new BasicEntity(block, new Vector2(380, 260)));
-      _entities.Add(new BasicEntity(block, new Vector2(500, 380)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 0)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 40)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 80)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 120)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 160)));
+      _entities.Add(new BasicEntity(block, new Vector2(160, 200)));
 
+      _entities.Add(new BasicEntity(block, new Vector2(200, 200)));
+      _entities.Add(new BasicEntity(block, new Vector2(240, 200)));
+      _entities.Add(new BasicEntity(block, new Vector2(280, 200)));
+      _entities.Add(new BasicEntity(block, new Vector2(320, 200)));
       //var rectangles = new Dictionary<Vector2, List<Rectangle>>();
       //var otherRects = new List<List<Rectangle>>();
       //foreach (var entity in _entities)

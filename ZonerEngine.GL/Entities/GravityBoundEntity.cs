@@ -11,15 +11,29 @@ namespace ZonerEngine.GL.Entities
 {
   public class GravityBoundEntity : Entity
   {
+    public enum PlayerStates
+    {
+      Idle,
+      Running,
+      Jumping,
+      Falling,
+      WallJumping,
+    }
+
     private TextureComponent _textureComponent;
     private MoveComponent _moveComponent;
     private CollisionComponent _collisionComponent;
+
+    public PlayerStates State { get; private set; } = PlayerStates.Idle;
 
     public GravityBoundEntity(Texture2D texture, Vector2 position)
     {
       Position = position;
 
-      _textureComponent = new TextureComponent(this, texture);
+      _textureComponent = new TextureComponent(this, texture)
+      {
+        Colour = Color.Green,
+      };
       _moveComponent = new MoveComponent(this, (gameTime, entities) => Move(gameTime, entities));
       _collisionComponent = new CollisionComponent(this, new Rectangle(
         0,
@@ -37,17 +51,49 @@ namespace ZonerEngine.GL.Entities
     private float _fall;
     private float _jump;
 
+    private bool _falling = false;
+    private bool _jumping = false;
+    private bool _wallJumping = false;
+    private bool _onGround = false;
+    private bool _onWall = false;
+
+    private float _wallJumpTimer = 0f;
+    private float _wallJumpSpeed = 0f;
+
     public enum GravityStates
     {
-      Jumping,
-      Falling,
-      OnGround,
+      //Jumping,
+      //Falling,
+      //OnGround,
     }
 
-    private GravityStates _gravityState = GravityStates.Falling;
+    //private GravityStates _gravityState = GravityStates.Falling;
 
     private void Move(GameTime gameTime, List<Entity> entities)
     {
+      PlayerStates nextState = PlayerStates.Idle;
+      bool jump = false;
+      if (GameKeyboard.IsKeyDown(Keys.A) || GameKeyboard.IsKeyDown(Keys.D))
+      {
+        nextState = PlayerStates.Running;
+      }
+
+      if (GameKeyboard.IsKeyDown(Keys.Space) && !_wallJumping)
+      {
+        if (_onGround)
+        {
+          jump = true;
+        }
+        else
+        {
+          if (_onWall && _falling)
+          {
+            jump = true;
+            _wallJumping = true;
+          }
+        }
+      }
+
       var velocity = new Vector2();
       _moveComponent.Velocity = new Vector2();
 
@@ -66,28 +112,48 @@ namespace ZonerEngine.GL.Entities
         velocity.X = 0;
       }
 
-      if (GameKeyboard.IsKeyDown(Keys.Space) && _gravityState == GravityStates.OnGround)
+      if (jump)
       {
+        _jumping = true;
         _jump = -10f;
-        _gravityState = GravityStates.Jumping;
+        //_gravityState = GravityStates.Jumping;
       }
 
-      if (_gravityState == GravityStates.Jumping)
+      if (_jumping)
       {
         _jump += 0.5f;
+        _fall = 0;
         velocity.Y += _jump;
         if (_jump >= 0)
         {
-          _gravityState = GravityStates.Falling;
+          _jumping = false;
+          //_gravityState = GravityStates.Falling;
         }
       }
 
-      if (_gravityState != GravityStates.Jumping)
+      if (!_jumping && !_wallJumping)
       {
         _fall += 0.5f;
+        _fall = MathHelper.Clamp(_fall, 0, 10);
         velocity.Y += _fall;
       }
 
+      if (_wallJumping)
+      {
+        _wallJumpTimer += (float)gameTime.ElapsedGameTime.TotalSeconds;
+        if (!_jumping)
+        {
+          _wallJumpTimer = 0;
+          _wallJumping = false;
+          _jumping = false;
+        }
+
+        velocity.X += 5f;
+      }
+
+      _onGround = false;
+      _onWall = false;
+      _falling = false;
       foreach (var entity in entities)
       {
         if (entity == this)
@@ -135,16 +201,25 @@ namespace ZonerEngine.GL.Entities
         }
 
         velocity = new Vector2(x, y);
+
+        if (doneY && y == 0)
+          _onGround = true;
+
+        if (doneX && x == 0)
+        {
+          _onWall = true;
+          _wallJumping = false;
+        }
       }
 
-      if (velocity.Y == 0)
+      if (_onGround)
       {
         _fall = 0;
-        _gravityState = GravityStates.OnGround;
       }
       else if (velocity.Y > 0)
       {
-        _gravityState = GravityStates.Falling;
+        //_gravityState = GravityStates.Falling;
+        _falling = true;
       }
 
       _moveComponent.Velocity = velocity;
