@@ -3,6 +3,6 @@ namespace ZonerEngine.GL
 {
   public class Settings
   {
-    public bool ShowCollidingBoxes { get; set; } = true;
+    public bool ShowCollidingBoxes { get; set; } = false;
   }
 }

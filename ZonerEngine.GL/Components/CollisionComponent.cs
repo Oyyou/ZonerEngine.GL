@@ -49,7 +49,7 @@ namespace ZonerEngine.GL.Components
       UpdateCollisionRectangle();
 
       if (Helpers.IsDebug())
-        _border = ZonerGame.TextureManager.GetRectangleBorder(_rectangle);
+        _border = ZonerGame.TextureManager.GetRectangleBorder(_rectangle, Color.Yellow);
     }
 
     public override void Unload()

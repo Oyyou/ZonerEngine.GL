@@ -13,7 +13,7 @@ namespace ZonerEngine.GL.Managers
       _graphicsDevice = graphicsDevice;
     }
 
-    public Texture2D GetRectangleBorder(Rectangle rectangle)
+    public Texture2D GetRectangleBorder(Rectangle rectangle, Color colour)
     {
       var texture = new Texture2D(_graphicsDevice, rectangle.Width, rectangle.Height);
       var colours = new Color[texture.Width * texture.Height];
@@ -23,12 +23,10 @@ namespace ZonerEngine.GL.Managers
       {
         for (int x = 0; x < texture.Width; x++)
         {
-          var borderColour = Color.Black;
-
           if (x <= 0 || x >= (texture.Width - 1) ||
              y <= 0 || y >= (texture.Height - 1))
           {
-            colours[index] = borderColour;
+            colours[index] = colour;
           }
           index++;
         }
