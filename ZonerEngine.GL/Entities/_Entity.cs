@@ -17,6 +17,11 @@ namespace ZonerEngine.GL.Entities
 
     }
 
+    public virtual void LoadContent()
+    {
+
+    }
+
     public virtual void Unload()
     {
       foreach (var component in Components)

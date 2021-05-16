@@ -64,7 +64,7 @@ namespace ZonerEngine.GL.Components
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-      if (_border != null)
+      if (_border != null && ZonerGame.Settings.ShowCollidingBoxes)
         spriteBatch.Draw(_border, CollisionRectangle, null, Color.White, 0f, new Vector2(0f, 0f), SpriteEffects.None, 0.99f);
     }
 

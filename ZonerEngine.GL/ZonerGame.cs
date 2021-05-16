@@ -15,16 +15,23 @@ namespace ZonerEngine.GL
 
     protected State _state;
 
+    public GameModel GameModel { get; private set; }
+
+    #region Statics
+
+    public static Settings Settings;
+
     public static TextureManager TextureManager;
     public static Random Random;
-
-    public GameModel GameModel { get; private set; }
 
     public static int ScreenWidth { get; protected set; }
     public static int ScreenHeight { get; protected set; }
 
+    #endregion
+
     public ZonerGame()
     {
+      Settings = new Settings();
       _graphics = new GraphicsDeviceManager(this);
       Content.RootDirectory = "Content";
     }
@@ -88,6 +95,11 @@ namespace ZonerEngine.GL
 
       GameKeyboard.Update(gameTime);
       GameMouse.Update(gameTime);
+
+      if(GameKeyboard.IsKeyPressed(Microsoft.Xna.Framework.Input.Keys.G))
+      {
+        Settings.ShowCollidingBoxes = !Settings.ShowCollidingBoxes;
+      }
     }
 
     /// <summary>
