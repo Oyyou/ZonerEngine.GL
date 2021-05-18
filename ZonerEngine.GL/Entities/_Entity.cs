@@ -12,6 +12,8 @@ namespace ZonerEngine.GL.Entities
 
     public Vector2 Position { get; set; }
 
+    public bool IsRemoved { get; set; } = false;
+
     public Entity()
     {
 

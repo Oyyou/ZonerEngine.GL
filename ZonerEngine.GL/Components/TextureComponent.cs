@@ -32,6 +32,8 @@ namespace ZonerEngine.GL.Components
 
     public Color Colour { get; set; } = Color.White;
 
+    public float Opacity { get; set; } = 1f;
+
     public virtual Rectangle SourceRectangle
     {
       get
@@ -64,7 +66,7 @@ namespace ZonerEngine.GL.Components
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-      spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
+      spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
     }
   }
 }
