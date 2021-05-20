@@ -8,6 +8,9 @@ namespace ZonerEngine.GL.Tiled
   [XmlRoot(ElementName = "map")]
   public class TiledMap
   {
+    [XmlIgnore]
+    public string Path { get; set; }
+
     [XmlAttribute("orientation")]
     public string Orientation { get; set; }
 
