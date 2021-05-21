@@ -34,17 +34,7 @@ namespace ZonerEngine.GL.Components
 
     public float Opacity { get; set; } = 1f;
 
-    public virtual Rectangle SourceRectangle
-    {
-      get
-      {
-        return new Rectangle(
-          0,
-          0,
-          Width,
-          Height);
-      }
-    }
+    public Rectangle SourceRectangle;
 
     public SpriteEffects SpriteEffect = SpriteEffects.None;
 
@@ -53,6 +43,7 @@ namespace ZonerEngine.GL.Components
     public TextureComponent(Entity parent, Texture2D texture) : base(parent)
     {
       _texture = texture;
+      SourceRectangle = new Rectangle(0, 0, Width, Height);
     }
 
     public override void Unload()

@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,27 @@ namespace ZonerEngine.GL.Tiled
       var texture = _content.Load<Texture2D>(file);
 
       return texture;
+    }
+
+    public Dictionary<int, Vector2> GetTilesetPosition(TiledTileset tileset)
+    {
+      var result = new Dictionary<int, Vector2>();
+
+      var height = tileset.Image.Height / tileset.TileHeight;
+      var width = tileset.Image.Width / tileset.TileWidth;
+
+      int i = 0;
+      for (int y = 0; y < height; y++)
+      {
+        for(int x = 0; x < width; x++)
+        {
+          i++;
+
+          result.Add(i, new Vector2(x * tileset.TileWidth, y * tileset.TileHeight));
+        }
+      }
+
+      return result;
     }
   }
 }

@@ -14,6 +14,10 @@ namespace ZonerEngine.GL.Entities
 
     public bool IsRemoved { get; set; } = false;
 
+    public float Layer { get; set; }
+
+    public string Tag { get; set; }
+
     public Entity()
     {
 
