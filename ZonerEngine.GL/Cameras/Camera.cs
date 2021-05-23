@@ -43,7 +43,7 @@ namespace ZonerEngine.GL.Cameras
       else if (GameKeyboard.IsKeyDown(Microsoft.Xna.Framework.Input.Keys.Left))
         Scale -= 0.01f;
 
-      Scale = 1.57f;// Math.Clamp(Scale, 0.5f, 2.0f);
+      //Scale = 1.57f;// Math.Clamp(Scale, 0.5f, 2.0f);
 
       Position = newPosition;// Vector2.Lerp(Position, newPosition, 0.05f);
       //Transform = Matrix.CreateTranslation(Position.X, Position.Y, 0);v
@@ -52,8 +52,8 @@ namespace ZonerEngine.GL.Cameras
 
       if (x > 0)
         x = 0;
-      //if (y < 0 )
-      //  y = 0;
+      //if (y > -260 )
+      //  y = -260;
 
       Transform = Matrix.CreateTranslation(x, y, 0) * 
         Matrix.CreateScale(Scale, Scale, 1);
