@@ -29,9 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cameras\" />
-    <Folder Include="Components\" />
     <Folder Include="Entities\" />
-    <Folder Include="Models\" />
     <Folder Include="Managers\" />
     <Folder Include="States\" />
     <Folder Include="UI\" />

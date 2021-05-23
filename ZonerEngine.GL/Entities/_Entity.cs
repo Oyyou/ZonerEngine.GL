@@ -8,6 +8,8 @@ namespace ZonerEngine.GL.Entities
 {
   public class Entity
   {
+    public readonly List<Entity> Entities = new List<Entity>();
+
     public readonly List<Component> Components = new List<Component>();
 
     public Vector2 Position { get; set; }
@@ -51,6 +53,17 @@ namespace ZonerEngine.GL.Entities
     public void AddComponent(Component component)
     {
       Components.Add(component);
+    }
+
+    public void AddEntities(params Entity[] entities)
+    {
+      foreach (var entity in entities)
+        AddEntity(entity);
+    }
+
+    public void AddEntity(Entity entity)
+    {
+      Entities.Add(entity);
     }
   }
 }

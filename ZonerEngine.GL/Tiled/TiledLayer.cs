@@ -20,6 +20,9 @@ namespace ZonerEngine.GL.Tiled
     [XmlAttribute("height")]
     public int Height { get; set; }
 
+    [XmlElement("properties")]
+    public TiledProperties Properties { get; set; }
+
     [XmlElement("data")]
     public TiledData Data { get; set; }
   }

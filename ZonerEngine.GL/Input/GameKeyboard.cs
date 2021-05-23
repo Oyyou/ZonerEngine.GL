@@ -43,6 +43,21 @@ namespace ZonerEngine.GL.Input
       return CurrentKeyboard.IsKeyDown(key);// && _keyTimer[key] > 0.1;
     }
 
+    public static bool IsKeyUp(Keys key)
+    {
+      return CurrentKeyboard.IsKeyUp(key);// && _keyTimer[key] > 0.1;
+    }
+
+    public static bool WasKeyDown(Keys key)
+    {
+      return PreviouseKeyboard.IsKeyDown(key);
+    }
+
+    public static bool WasKeyUp(Keys key)
+    {
+      return PreviouseKeyboard.IsKeyUp(key);
+    }
+
     public static bool IsKeyPressed(Keys key)
     {
       return PreviouseKeyboard.IsKeyDown(key) &&
