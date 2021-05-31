@@ -52,10 +52,13 @@ namespace ZonerEngine.GL.Cameras
 
       if (x > 0)
         x = 0;
-      //if (y > -260 )
-      //  y = -260;
 
-      Transform = Matrix.CreateTranslation(x, y, 0) * 
+      if (x < -2560)
+        x = -2560;
+      //if (y < -3520)
+        y = -3520;
+
+      Transform = Matrix.CreateTranslation(x, y, 0) *
         Matrix.CreateScale(Scale, Scale, 1);
     }
 
