@@ -8,8 +8,11 @@ namespace ZonerEngine.GL.Components
 {
   public enum CollisionTypes
   {
-    Static,
-    Dynamic,
+    Top = 1,
+    Left = 2,
+    Right = 4,
+    Bottom = 8,
+    All = 15,
   }
 
   public class CollisionComponent : Component

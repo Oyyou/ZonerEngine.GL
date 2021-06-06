@@ -42,12 +42,18 @@ namespace ZonerEngine.GL.Entities
     {
       foreach (var component in Components)
         component.Update(gameTime, entities);
+
+      foreach (var entity in Entities)
+        entity.Update(gameTime, entities);
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
       foreach (var component in Components)
         component.Draw(gameTime, spriteBatch);
+
+      foreach (var entity in Entities)
+        entity.Draw(gameTime, spriteBatch);
     }
 
     public void AddComponent(Component component)

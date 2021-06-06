@@ -17,7 +17,7 @@ namespace ZonerEngine.GL.Entities
         0,
         texture.Width,
         texture.Height),
-        CollisionTypes.Static
+        CollisionTypes.All
       );
 
       AddComponent(textureComponent);

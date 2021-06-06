@@ -35,6 +35,9 @@ namespace ZonerEngine.GL.Tiled
     [XmlElement("layer")]
     public List<TiledLayer> Layers { get; set; }
 
+    [XmlElement("group")]
+    public List<TiledGroup> Groups { get; set; }
+
     [XmlElement("objectgroup")]
     public List<TiledObjectGroup> ObjectGroup { get; set; }
   }
