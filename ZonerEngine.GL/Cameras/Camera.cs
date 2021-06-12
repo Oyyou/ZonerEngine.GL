@@ -17,6 +17,10 @@ namespace ZonerEngine.GL.Cameras
 
     public int? MaxY { get; set; }
 
+    public int? StaticX { get; set; }
+
+    public int? StaticY { get; set; }
+
     public float Scale { get; set; } = 1f;
 
     public Camera(Vector2 position)
@@ -50,13 +54,23 @@ namespace ZonerEngine.GL.Cameras
       var x = -Position.X + (ZonerGame.ScreenWidth / 2);
       var y = -Position.Y + (ZonerGame.ScreenHeight / 2);
 
-      if (x > 0)
-        x = 0;
+      if (MaxX.HasValue && x > MaxX.Value)
+        x = MaxX.Value;
 
-      if (x < -2560)
-        x = -2560;
-      //if (y < -3520)
-        y = -3520;
+      if (MinX.HasValue && x < MinX.Value)
+        x = MinX.Value;
+
+      if (StaticX.HasValue)
+        x = StaticX.Value;
+
+      if (MaxY.HasValue && y > MaxY.Value)
+        y = MaxY.Value;
+
+      if (MinY.HasValue && y < MinY.Value)
+        y = MinY.Value;
+
+      if (StaticY.HasValue)
+        y = StaticY.Value;
 
       Transform = Matrix.CreateTranslation(x, y, 0) *
         Matrix.CreateScale(Scale, Scale, 1);
