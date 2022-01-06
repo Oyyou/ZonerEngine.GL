@@ -29,9 +29,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Cameras\" />
-    <Folder Include="Entities\" />
     <Folder Include="Managers\" />
-    <Folder Include="States\" />
     <Folder Include="UI\" />
     <Folder Include="UI\Texts\" />
     <Folder Include="Input\" />
