@@ -21,7 +21,7 @@ namespace ZonerEngine.GL.Maps
 
     public void Add(MappedComponent obj)
     {
-      if (!Collides(obj))
+      if (Collides(obj))
       {
         return;
       }
@@ -70,6 +70,8 @@ namespace ZonerEngine.GL.Maps
 
     public void WriteMap()
     {
+      Console.Clear();
+
       for (int y = 0; y < Height; y++)
       {
         for (int x = 0; x < Width; x++)

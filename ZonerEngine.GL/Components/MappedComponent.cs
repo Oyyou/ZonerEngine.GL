@@ -69,6 +69,7 @@ namespace ZonerEngine.GL.Components
     public MappedComponent(Entity parent, Func<Rectangle> getRectangle) : base(parent)
     {
       _getRectangle = getRectangle;
+      Rectangle = _getRectangle();
     }
 
     public override void Unload()

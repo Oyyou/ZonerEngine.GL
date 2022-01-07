@@ -17,6 +17,7 @@ namespace ZonerEngine.GL.States
 
     public override void LoadContent()
     {
+      _entities = new List<Entity>();
     }
 
     public override void UnloadContent()
