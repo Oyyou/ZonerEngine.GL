@@ -36,6 +36,11 @@ namespace ZonerEngine.GL.Entities
         component.Unload();
 
       Components.Clear();
+
+      foreach (var entity in Entities)
+        entity.Unload();
+
+      Entities.Clear();
     }
 
     public virtual void Update(GameTime gameTime, List<Entity> entities)

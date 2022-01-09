@@ -10,6 +10,10 @@ namespace ZonerEngine.GL.Components
   {
     protected Texture2D _texture;
 
+    protected Func<bool> _drawCondition = () => true;
+
+    protected bool _canDraw = true;
+
     public Vector2 PositionOffset { get; set; } = new Vector2(0, 0);
 
     public float Layer { get; set; } = 0;
@@ -40,9 +44,11 @@ namespace ZonerEngine.GL.Components
 
     public Vector2 Origin { get; set; } = new Vector2(0, 0);
 
-    public TextureComponent(Entity parent, Texture2D texture) : base(parent)
+    public TextureComponent(Entity parent, Texture2D texture, Func<bool> drawCondition = null) : base(parent)
     {
       _texture = texture;
+      if (drawCondition != null)
+        _drawCondition = drawCondition;
       SourceRectangle = new Rectangle(0, 0, Width, Height);
     }
 
@@ -53,11 +59,13 @@ namespace ZonerEngine.GL.Components
 
     public override void Update(GameTime gameTime, List<Entity> entities)
     {
+      _canDraw = _drawCondition();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-      spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
+      if (_canDraw)
+        spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
     }
   }
 }

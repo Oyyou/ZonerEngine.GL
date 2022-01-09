@@ -10,7 +10,7 @@ namespace ZonerEngine.GL.Components
   {
     private Func<Rectangle> _getRectangle;
 
-    public bool IsSolid { get; set; }
+    public readonly char MapChar;
 
     public Rectangle Rectangle { get; set; }
 
@@ -66,8 +66,9 @@ namespace ZonerEngine.GL.Components
 
     #endregion
 
-    public MappedComponent(Entity parent, Func<Rectangle> getRectangle) : base(parent)
+    public MappedComponent(Entity parent, char mapChar, Func<Rectangle> getRectangle) : base(parent)
     {
+      MapChar = mapChar;
       _getRectangle = getRectangle;
       Rectangle = _getRectangle();
     }

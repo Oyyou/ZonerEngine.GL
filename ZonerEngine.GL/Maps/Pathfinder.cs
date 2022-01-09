@@ -91,6 +91,15 @@ namespace ZonerEngine.GL.Maps
       if (y + 1 < _map.Height)
         result.Add(new Point(x, y + 1));
 
+      for (int i = 0; i < result.Count; i++)
+      {
+        if (_map.IsPassable(result[i].X, result[i].Y))
+          continue;
+
+        result.RemoveAt(i);
+        i--;
+      }
+
       return result;
     }
   }

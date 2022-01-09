@@ -8,15 +8,28 @@ namespace ZonerEngine.GL.Maps
 {
   public class Map
   {
-    public int[,] Data { get; private set; }
+    public char[,] Data { get; private set; }
 
     public int Width => Data.GetLength(1);
 
     public int Height => Data.GetLength(0);
 
-    public Map(int[,] data)
+    public Map(char[,] data)
     {
       Data = data;
+    }
+
+    public Map(int width, int height, char defaultChar)
+    {
+      Data = new char[height, width];
+
+      for (int y = 0; y < Height; y++)
+      {
+        for (int x = 0; x < Width; x++)
+        {
+          Data[y, x] = defaultChar;
+        }
+      }
     }
 
     public void Add(MappedComponent obj)
@@ -30,7 +43,7 @@ namespace ZonerEngine.GL.Maps
       {
         for (int x = obj.X; x < obj.Right; x++)
         {
-          Data[y, x] = 1;
+          Data[y, x] = obj.MapChar;
         }
       }
     }
@@ -44,7 +57,7 @@ namespace ZonerEngine.GL.Maps
       {
         for (int x = obj.X; x < obj.Right; x++)
         {
-          if (Data[y, x] == 1)
+          if (Data[y, x] != '0')
             return true;
         }
       }
@@ -80,6 +93,16 @@ namespace ZonerEngine.GL.Maps
         }
         Console.WriteLine();
       }
+    }
+
+    public bool IsPassable(int x, int y)
+    {
+      return Data[y, x] == '0';
+    }
+
+    public bool IsPassable(Point point)
+    {
+      return IsPassable(point.X, point.Y);
     }
   }
 }
