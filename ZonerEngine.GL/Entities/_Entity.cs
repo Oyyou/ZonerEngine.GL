@@ -6,7 +6,7 @@ using ZonerEngine.GL.Components;
 
 namespace ZonerEngine.GL.Entities
 {
-  public class Entity
+  public class Entity : ICloneable
   {
     public readonly List<Entity> Entities = new List<Entity>();
 
@@ -75,6 +75,22 @@ namespace ZonerEngine.GL.Entities
     public void AddEntity(Entity entity)
     {
       Entities.Add(entity);
+    }
+
+    public object Clone()
+    {
+      var result = (Entity)this.MemberwiseClone();
+      result.Entities.Clear();
+      result.Components.Clear();
+
+      foreach (var entity in Entities)
+        result.Entities.Add((Entity)entity.Clone());
+
+      var components = new List<Component>();
+      foreach (var component in Components)
+        result.Components.Add((Component)component.Clone());
+
+      return result;
     }
   }
 }

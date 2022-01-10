@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 
@@ -30,6 +30,19 @@ namespace ZonerEngine.GL.Maps
 
     public List<Point> GetPath(Point start, Point end)
     {
+      var size = new Point(1, 1);
+      if (!_map.FitsOnMap(start, size))
+        return new List<Point>();
+
+      if (!_map.FitsOnMap(end, size))
+        return new List<Point>();
+
+      if (_map.Collides(start, size))
+        return new List<Point>();
+
+      if (_map.Collides(end, size))
+        return new List<Point>();
+
       var frontier = new Queue<Point>();
       var reached = new HashSet<Point>();
       var cameFrom = new Dictionary<Point, Point>();

@@ -32,5 +32,10 @@ namespace ZonerEngine.GL.Components
     {
 
     }
+
+    public override object Clone()
+    {
+      return this.MemberwiseClone();
+    }
   }
 }

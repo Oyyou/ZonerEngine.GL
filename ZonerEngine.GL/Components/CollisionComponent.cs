@@ -90,5 +90,10 @@ namespace ZonerEngine.GL.Components
         CollisionRectangle.Height
       );
     }
+
+    public override object Clone()
+    {
+      return this.MemberwiseClone();
+    }
   }
 }

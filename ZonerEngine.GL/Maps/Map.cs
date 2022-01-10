@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Text;
 using ZonerEngine.GL.Components;
 
@@ -50,12 +50,20 @@ namespace ZonerEngine.GL.Maps
 
     public bool Collides(MappedComponent obj)
     {
-      if (!FitsOnMap(obj))
+      return Collides(new Point(obj.X, obj.Y), new Point(obj.Width, obj.Height));
+    }
+
+    public bool Collides(Point position, Point size)
+    {
+      if (!FitsOnMap(position, size))
         return true;
 
-      for (int y = obj.Y; y < obj.Bottom; y++)
+      var bottom = position.Y + size.Y;
+      var right = position.X + size.X;
+
+      for (int y = position.Y; y < bottom; y++)
       {
-        for (int x = obj.X; x < obj.Right; x++)
+        for (int x = position.X; x < right; x++)
         {
           if (Data[y, x] != '0')
             return true;
@@ -66,16 +74,24 @@ namespace ZonerEngine.GL.Maps
 
     public bool FitsOnMap(MappedComponent obj)
     {
-      if (obj.X < 0)
+      return FitsOnMap(new Point(obj.X, obj.Y), new Point(obj.Width, obj.Height));
+    }
+
+    public bool FitsOnMap(Point position, Point size)
+    {
+      var bottom = position.Y + size.Y;
+      var right = position.X + size.X;
+
+      if (position.X < 0)
         return false;
 
-      if (obj.Y < 0)
+      if (position.Y < 0)
         return false;
 
-      if (obj.Bottom > Height)
+      if (bottom > Height)
         return false;
 
-      if (obj.Right > Width)
+      if (right > Width)
         return false;
 
       return true;

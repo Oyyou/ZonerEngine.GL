@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace ZonerEngine.GL.Models
 {
-  public class Animation
+  public class Animation : ICloneable
   {
     public readonly Texture2D Texture;
 
@@ -34,6 +34,11 @@ namespace ZonerEngine.GL.Models
       Texture = texture;
       TotalXFrames = totalXFrames;
       AnimationSpeed = animationSpeed;
+    }
+
+    public object Clone()
+    {
+      return this.MemberwiseClone();
     }
   }
 }

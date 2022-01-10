@@ -67,5 +67,10 @@ namespace ZonerEngine.GL.Components
       if (_canDraw)
         spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
     }
+
+    public override object Clone()
+    {
+      return this.MemberwiseClone();
+    }
   }
 }

@@ -6,7 +6,7 @@ using ZonerEngine.GL.Entities;
 
 namespace ZonerEngine.GL.Components
 {
-  public abstract class Component
+  public abstract class Component : ICloneable
   {
     public readonly Entity Parent;
 
@@ -20,5 +20,7 @@ namespace ZonerEngine.GL.Components
     public abstract void Update(GameTime gameTime, List<Entity> entities);
 
     public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+
+    public abstract object Clone();
   }
 }

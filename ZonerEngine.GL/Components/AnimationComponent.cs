@@ -115,5 +115,18 @@ namespace ZonerEngine.GL.Components
 
       spriteBatch.Draw(CurrentAnimation.Texture, Parent.Position, SourceRectangle, Color.White, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
     }
+
+    public override object Clone()
+    {
+      var result = (AnimationComponent)this.MemberwiseClone();
+      result.CurrentAnimation = (Animation)this.CurrentAnimation.Clone();
+      result.Animations = new Dictionary<string, Animation>();
+      foreach(var animation in this.Animations)
+      {
+        result.AddAnimation(animation.Key, (Animation)animation.Value.Clone());
+      }
+
+      return result;
+    }
   }
 }
