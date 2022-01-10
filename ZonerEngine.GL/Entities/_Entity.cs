@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZonerEngine.GL.Components;
@@ -8,9 +9,9 @@ namespace ZonerEngine.GL.Entities
 {
   public class Entity : ICloneable
   {
-    public readonly List<Entity> Entities = new List<Entity>();
+    public List<Entity> Entities { get; protected set; } = new List<Entity>();
 
-    public readonly List<Component> Components = new List<Component>();
+    public List<Component> Components { get; protected set; } = new List<Component>();
 
     public Vector2 Position { get; set; }
 
@@ -80,15 +81,23 @@ namespace ZonerEngine.GL.Entities
     public object Clone()
     {
       var result = (Entity)this.MemberwiseClone();
+      result.Entities = this.Entities.ToList();
+      result.Components = this.Components.ToList();
       result.Entities.Clear();
       result.Components.Clear();
 
       foreach (var entity in Entities)
-        result.Entities.Add((Entity)entity.Clone());
+      {
+        var newEntity = (Entity)entity.Clone();
+        result.Entities.Add(newEntity);
+      }
 
-      var components = new List<Component>();
       foreach (var component in Components)
-        result.Components.Add((Component)component.Clone());
+      {
+        var newComponent = (Component)component.Clone();
+        newComponent.Parent = result;
+        result.Components.Add(newComponent);
+      }
 
       return result;
     }

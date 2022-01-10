@@ -8,7 +8,7 @@ namespace ZonerEngine.GL.Components
 {
   public abstract class Component : ICloneable
   {
-    public readonly Entity Parent;
+    public Entity Parent { get; set; }
 
     public Component(Entity parent)
     {
