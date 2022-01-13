@@ -15,8 +15,6 @@ namespace ZonerEngine.GL.Maps
       public int X => Point.X;
 
       public int Y => Point.Y;
-
-      public List<Node> Paths = new List<Node>();
     }
 
     private Map _map;

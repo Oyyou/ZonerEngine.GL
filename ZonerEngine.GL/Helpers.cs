@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +46,11 @@ namespace ZonerEngine.GL
         (int)obj.Width,
         (int)obj.Height
       );
+    }
+
+    public static Dictionary<T1, T2> ToDictionary<T1, T2>(this object obj)
+    {
+      return JObject.FromObject(obj).ToObject<Dictionary<T1, T2>>();
     }
 
     public static Color[] GetBorder(Texture2D texture, int thickness = 1, Color? colour = null)

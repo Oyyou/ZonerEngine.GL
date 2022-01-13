@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using ZonerEngine.GL.Components;
 
@@ -17,6 +18,19 @@ namespace ZonerEngine.GL.Maps
     public Map(char[,] data)
     {
       Data = data;
+    }
+
+    public Map(List<char[]> data)
+    {
+      Data = new char[data.Count, data[0].Length];
+
+      for (int y = 0; y < Height; y++)
+      {
+        for (int x = 0; x < Width; x++)
+        {
+          Data[y, x] = data[y][x];
+        }
+      }
     }
 
     public Map(int width, int height, char defaultChar)
