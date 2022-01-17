@@ -62,6 +62,17 @@ namespace ZonerEngine.GL.Maps
       }
     }
 
+    public void Remove(MappedComponent obj)
+    {
+      for (int y = obj.Y; y < obj.Bottom; y++)
+      {
+        for (int x = obj.X; x < obj.Right; x++)
+        {
+          Data[y, x] = '0';
+        }
+      }
+    }
+
     public bool Collides(MappedComponent obj)
     {
       return Collides(new Point(obj.X, obj.Y), new Point(obj.Width, obj.Height));

@@ -20,6 +20,17 @@ namespace ZonerEngine.GL
       return false;
     }
 
+    public static bool NearlyEqual(float f1, float f2)
+    {
+      // Equal if they are within 0.00001 of each other
+      return Math.Abs(f1 - f2) < 0.00001;
+    }
+
+    public static bool NearlyEqual(Vector2 v1, Vector2 v2)
+    {
+      return NearlyEqual(v1.X, v2.X) && NearlyEqual(v1.Y, v2.Y);
+    }
+
     public static T GetComponent<T>(this IEnumerable<Component> b) where T : Component
     {
       return b.OfType<T>().FirstOrDefault() as T;

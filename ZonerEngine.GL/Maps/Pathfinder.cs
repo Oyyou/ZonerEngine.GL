@@ -79,8 +79,20 @@ namespace ZonerEngine.GL.Maps
       }
 
       path.Reverse();
+      path.Add(end);
 
       return path;
+    }
+
+    public List<Point> GetPathNextTo(Point start, Point end)
+    {
+      var neighbours = GetNeighbours(end);
+      var results = neighbours.Select(c => GetPath(start, c));
+
+      if (results.Count() == 0)
+        return new List<Point>();
+
+      return results.OrderBy(c => c.Count()).FirstOrDefault();
     }
 
     private List<Point> GetNeighbours(Point point)
