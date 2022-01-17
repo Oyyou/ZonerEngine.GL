@@ -18,6 +18,8 @@ namespace ZonerEngine.GL.Components
 
     public float Layer { get; set; } = 0;
 
+    public Func<float> GetLayer = null;
+
     public virtual int Width
     {
       get
@@ -65,7 +67,12 @@ namespace ZonerEngine.GL.Components
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
       if (_canDraw)
+      {
+        if (GetLayer != null)
+          Layer = GetLayer();
+
         spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
+      }
     }
 
     public override object Clone()
