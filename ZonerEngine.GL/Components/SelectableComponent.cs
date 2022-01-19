@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -21,6 +22,10 @@ namespace ZonerEngine.GL.Components
     public Action OffSelected;
 
     public Action OffHover;
+
+    public bool IsSelected { get; set; } = false;
+
+    public bool IsHover{ get; set; } = false;
 
     public SelectableComponent(Entity parent, Rectangle staticRectangle) : base(parent)
     {
@@ -45,19 +50,23 @@ namespace ZonerEngine.GL.Components
       if (GameMouse.Intersects(Rectangle))
       {
         OnHover?.Invoke();
+        IsHover = true;
 
         if (GameMouse.IsLeftClicked)
         {
           OnSelected?.Invoke();
+          IsSelected = true;
         }
       }
       else
       {
         OffHover.Invoke();
+        IsHover = false;
 
-        if (GameMouse.IsLeftClicked)
+        if (GameMouse.IsLeftClicked && !GameKeyboard.IsKeyDown(Keys.LeftShift))
         {
           OffSelected?.Invoke();
+          IsSelected = false;
         }
       }
     }
@@ -73,3 +82,4 @@ namespace ZonerEngine.GL.Components
     }
   }
 }
+
