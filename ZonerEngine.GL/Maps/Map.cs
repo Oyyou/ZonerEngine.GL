@@ -73,6 +73,18 @@ namespace ZonerEngine.GL.Maps
       }
     }
 
+    public IEnumerable<Point> GetEmptyPoints()
+    {
+      for (int y = 0; y < Height; y++)
+      {
+        for (int x = 0; x < Width; x++)
+        {
+          if (Data[y, x] == '0')
+            yield return new Point(x, y);
+        }
+      }
+    }
+
     public bool Collides(MappedComponent obj)
     {
       return Collides(new Point(obj.X, obj.Y), new Point(obj.Width, obj.Height));
