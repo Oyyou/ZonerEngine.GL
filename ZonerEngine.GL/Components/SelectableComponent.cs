@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text;
 using ZonerEngine.GL.Entities;
 using ZonerEngine.GL.Input;
+using ZonerEngine.GL.Models;
 
 namespace ZonerEngine.GL.Components
 {
@@ -25,7 +26,11 @@ namespace ZonerEngine.GL.Components
 
     public bool IsSelected { get; set; } = false;
 
-    public bool IsHover{ get; set; } = false;
+    public bool IsHover { get; set; } = false;
+
+    public EntityInformation Information { get; set; } = null;
+
+    public Func<EntityInformation> GetInformation = null;
 
     public SelectableComponent(Entity parent, Rectangle staticRectangle) : base(parent)
     {
@@ -43,7 +48,10 @@ namespace ZonerEngine.GL.Components
     }
 
     public override void Update(GameTime gameTime, List<Entity> entities)
-    {
+    { 
+      if (GetInformation != null)
+        Information = GetInformation();
+
       if (GetRectangle != null)
         Rectangle = GetRectangle();
 
