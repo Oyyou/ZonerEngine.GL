@@ -64,12 +64,12 @@ namespace ZonerEngine.GL
       return JObject.FromObject(obj).ToObject<Dictionary<T1, T2>>();
     }
 
-    public static Color[] GetBorder(Texture2D texture, int thickness = 1, Color? colour = null)
+    public static Color[] GetBorder(Texture2D texture, int thickness = 1, Color? colour = null, Color? fillColour = null)
     {
-      return GetBorder(texture.Width, texture.Height, thickness, colour);
+      return GetBorder(texture.Width, texture.Height, thickness, colour, fillColour);
     }
 
-    public static Color[] GetBorder(int width, int height, int thickness = 1, Color? colour = null)
+    public static Color[] GetBorder(int width, int height, int thickness = 1, Color? colour = null, Color? fillColour = null)
     {
       thickness = Math.Max(1, thickness);
 
@@ -80,7 +80,7 @@ namespace ZonerEngine.GL
       {
         for (int x = 0; x < width; x++)
         {
-          var newColour = new Color(0, 0, 0, 0);
+          var newColour = fillColour != null ? fillColour.Value : new Color(0, 0, 0, 0);
 
           if (x < thickness || x > (width - 1) - thickness ||
               y < thickness || y > (height - 1) - thickness)
