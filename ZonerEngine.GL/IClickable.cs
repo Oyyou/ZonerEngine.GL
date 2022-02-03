@@ -3,6 +3,6 @@ namespace ZonerEngine.GL
 {
   public interface IClickable
   {
-    float Layer { get; set; }
+    float ClickLayer { get; }
   }
 }

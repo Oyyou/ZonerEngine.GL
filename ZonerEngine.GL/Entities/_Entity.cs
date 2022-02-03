@@ -7,7 +7,7 @@ using ZonerEngine.GL.Components;
 
 namespace ZonerEngine.GL.Entities
 {
-  public class Entity : ICloneable
+  public class Entity : ICloneable, IClickable
   {
     public List<Entity> Entities { get; protected set; } = new List<Entity>();
 
@@ -18,6 +18,8 @@ namespace ZonerEngine.GL.Entities
     public bool IsRemoved { get; set; } = false;
 
     public float Layer { get; set; }
+
+    public float ClickLayer => Layer;
 
     public string Tag { get; set; }
 

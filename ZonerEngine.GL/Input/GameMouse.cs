@@ -24,7 +24,7 @@ namespace ZonerEngine.GL.Input
     {
       get
       {
-        return ClickableObjects.OrderBy(c => c.Layer).LastOrDefault();
+        return ClickableObjects.OrderBy(c => c.ClickLayer).LastOrDefault();
       }
     }
 
