@@ -46,13 +46,13 @@ namespace ZonerEngine.GL.Entities
       Entities.Clear();
     }
 
-    public virtual void Update(GameTime gameTime, List<Entity> entities)
+    public virtual void Update(GameTime gameTime)
     {
       foreach (var component in Components)
-        component.Update(gameTime, entities);
+        component.Update(gameTime);
 
       foreach (var entity in Entities)
-        entity.Update(gameTime, entities);
+        entity.Update(gameTime);
     }
 
     public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

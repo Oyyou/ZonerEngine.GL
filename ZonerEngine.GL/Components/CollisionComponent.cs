@@ -60,7 +60,7 @@ namespace ZonerEngine.GL.Components
       _border.Dispose();
     }
 
-    public override void Update(GameTime gameTime, List<Entity> entities)
+    public override void Update(GameTime gameTime)
     {
       UpdateCollisionRectangle();
     }

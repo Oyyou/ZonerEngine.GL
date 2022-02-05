@@ -88,7 +88,7 @@ namespace ZonerEngine.GL.Components
     {
     }
 
-    public override void Update(GameTime gameTime, List<Entity> entities)
+    public override void Update(GameTime gameTime)
     {
       SetAnimation(gameTime);
     }

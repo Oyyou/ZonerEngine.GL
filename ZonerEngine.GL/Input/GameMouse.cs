@@ -52,6 +52,23 @@ namespace ZonerEngine.GL.Input
       }
     }
 
+    public static bool IsRightPressed
+    {
+      get
+      {
+        return _currentMouse.RightButton == ButtonState.Pressed;
+      }
+    }
+
+    public static bool IsRightClicked
+    {
+      get
+      {
+        return _previouseMouse.RightButton == ButtonState.Pressed &&
+          _currentMouse.RightButton == ButtonState.Released;
+      }
+    }
+
     public static bool IsLeftReleased
     {
       get

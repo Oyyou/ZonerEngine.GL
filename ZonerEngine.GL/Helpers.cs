@@ -49,6 +49,20 @@ namespace ZonerEngine.GL
       return b.Components.OfType<T>() as IEnumerable<T>;
     }
 
+    public static Rectangle Divide(this Rectangle rect, int amount)
+    {
+      return new Rectangle(
+        rect.X / amount,
+        rect.Y / amount,
+        rect.Width / amount,
+        rect.Height / amount);
+    }
+
+    public static Point Multiply(this Point point, int amount)
+    {
+      return new Point(point.X * amount, point.Y * amount);
+    }
+
     public static Rectangle ToRectangle(this TiledObject obj)
     {
       return new Rectangle(

@@ -59,7 +59,7 @@ namespace ZonerEngine.GL.Components
       _texture.Dispose();
     }
 
-    public override void Update(GameTime gameTime, List<Entity> entities)
+    public override void Update(GameTime gameTime)
     {
       _canDraw = _drawCondition();
     }

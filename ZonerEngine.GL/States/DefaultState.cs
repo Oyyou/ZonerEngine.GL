@@ -31,7 +31,7 @@ namespace ZonerEngine.GL.States
     public override void Update(GameTime gameTime)
     {
       foreach (var entity in _entities)
-        entity.Update(gameTime, _entities);
+        entity.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime)

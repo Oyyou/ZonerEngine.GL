@@ -8,11 +8,11 @@ namespace ZonerEngine.GL.Components
 {
   public class MoveComponent : Component
   {
-    private Action<GameTime, List<Entity>> _move;
+    private Action<GameTime> _move;
 
     public Vector2 Velocity;
 
-    public MoveComponent(Entity parent, Action<GameTime, List<Entity>> move) : base(parent)
+    public MoveComponent(Entity parent, Action<GameTime> move) : base(parent)
     {
       _move = move;
     }
@@ -22,9 +22,9 @@ namespace ZonerEngine.GL.Components
 
     }
 
-    public override void Update(GameTime gameTime, List<Entity> entities)
+    public override void Update(GameTime gameTime)
     {
-      _move(gameTime, entities);
+      _move(gameTime);
       Parent.Position += Velocity;
     }
 

@@ -17,7 +17,7 @@ namespace ZonerEngine.GL.Components
 
     public abstract void Unload();
 
-    public abstract void Update(GameTime gameTime, List<Entity> entities);
+    public abstract void Update(GameTime gameTime);
 
     public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 

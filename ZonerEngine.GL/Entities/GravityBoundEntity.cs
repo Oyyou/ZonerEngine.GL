@@ -34,7 +34,7 @@ namespace ZonerEngine.GL.Entities
       {
         Colour = Color.Green,
       };
-      _moveComponent = new MoveComponent(this, (gameTime, entities) => Move(gameTime, entities));
+      //_moveComponent = new MoveComponent(this, (gameTime, entities) => Move(gameTime, entities));
       _collisionComponent = new CollisionComponent(this, new Rectangle(
         0,
         0,
@@ -70,7 +70,7 @@ namespace ZonerEngine.GL.Entities
 
     //private GravityStates _gravityState = GravityStates.Falling;
 
-    private void Move(GameTime gameTime, List<Entity> entities)
+    /*private void Move(GameTime gameTime, List<Entity> entities)
     {
       PlayerStates nextState = PlayerStates.Idle;
       bool jump = false;
@@ -230,6 +230,6 @@ namespace ZonerEngine.GL.Entities
       }
 
       _moveComponent.Velocity = velocity;
-    }
+    }*/
   }
 }
