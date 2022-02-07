@@ -107,16 +107,17 @@ namespace ZonerEngine.GL.Input
         Vector3 scale;
         _camera.Decompose(out scale, out _, out _);
 
-        //scale = new Vector3(1f);
-
         var translation = _camera.Translation;
 
-        var test = 1f / scale.X;
+        var scaleX = 1f / scale.X;
+        var scaleY = 1f / scale.Y;
 
-        var x = (int)((Position.X - translation.X) * test);
-        var y = (int)((Position.Y - translation.Y) * test);
+        var x = (int)((Position.X - translation.X) * scaleX);
+        var y = (int)((Position.Y - translation.Y) * scaleY);
 
-        return new Point(x, y);          ;
+        return Vector2.Transform(new Vector2(X, Y), Matrix.Invert(_camera)).ToPoint();
+
+        return new Point(x, y);
       }
     }
 

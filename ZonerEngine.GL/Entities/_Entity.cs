@@ -23,6 +23,8 @@ namespace ZonerEngine.GL.Entities
 
     public string Tag { get; set; }
 
+    public Dictionary<string, dynamic> AdditionalProperties { get; set; } = new Dictionary<string, dynamic>();
+
     public Entity()
     {
 
