@@ -63,6 +63,15 @@ namespace ZonerEngine.GL
       return new Point(point.X * amount, point.Y * amount);
     }
 
+    public static Matrix CreateScale(this Matrix m, float x, float y, float z)
+    {
+      m.M11 = x;
+      m.M22 = y;
+      m.M33 = z;
+      m.M44 = 1f;
+      return m;
+    }
+
     public static Rectangle ToRectangle(this TiledObject obj)
     {
       return new Rectangle(

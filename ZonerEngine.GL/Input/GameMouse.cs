@@ -10,6 +10,7 @@ namespace ZonerEngine.GL.Input
   {
     private static MouseState _currentMouse;
     private static MouseState _previouseMouse;
+    private static Matrix _camera = Matrix.Identity;
 
     #region IClickable related
     /// <summary>
@@ -34,6 +35,11 @@ namespace ZonerEngine.GL.Input
         ClickableObjects.Add(clickableObject);
     }
     #endregion
+
+    public static void AddCamera(Matrix camera)
+    {
+      _camera = camera;
+    }
 
     public static bool IsLeftClicked
     {
@@ -91,6 +97,39 @@ namespace ZonerEngine.GL.Input
       }
     }
 
+    public static Point PositionWithCamera
+    {
+      get
+      {
+        if (_camera == Matrix.Identity)
+          return Position;
+
+        Vector3 scale;
+        _camera.Decompose(out scale, out _, out _);
+
+        //scale = new Vector3(1f);
+
+        var translation = _camera.Translation;
+
+        var test = 1f / scale.X;
+
+        var x = (int)((Position.X - translation.X) * test);
+        var y = (int)((Position.Y - translation.Y) * test);
+
+        return new Point(x, y);          ;
+      }
+    }
+
+    public static Rectangle RectangleWithCamera
+    {
+      get
+      {
+        var x = (int)PositionWithCamera.X;
+        var y = (int)PositionWithCamera.Y;
+        return new Rectangle(x, y, 1, 1);
+      }
+    }
+
     public static Rectangle Rectangle
     {
       get
@@ -129,8 +168,11 @@ namespace ZonerEngine.GL.Input
       _currentMouse = Mouse.GetState();
     }
 
-    public static bool Intersects(Rectangle rectangle)
+    public static bool Intersects(Rectangle rectangle, bool withCamera = false)
     {
+      if (withCamera)
+        return RectangleWithCamera.Intersects(rectangle);
+
       return Rectangle.Intersects(rectangle);
     }
   }
