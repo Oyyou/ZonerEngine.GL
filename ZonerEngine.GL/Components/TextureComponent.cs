@@ -46,6 +46,14 @@ namespace ZonerEngine.GL.Components
 
     public Vector2 Origin { get; set; } = new Vector2(0, 0);
 
+    public Vector2 DrawPosition
+    {
+      get
+      {
+        return Parent.Position + PositionOffset;
+      }
+    }
+
     public TextureComponent(Entity parent, Texture2D texture, Func<bool> drawCondition = null) : base(parent)
     {
       _texture = texture;
@@ -71,7 +79,7 @@ namespace ZonerEngine.GL.Components
         if (GetLayer != null)
           Layer = GetLayer();
 
-        spriteBatch.Draw(_texture, Parent.Position + PositionOffset, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
+        spriteBatch.Draw(_texture, DrawPosition, SourceRectangle, Colour * Opacity, 0f, Origin, new Vector2(1, 1), SpriteEffect, Layer);
       }
     }
 

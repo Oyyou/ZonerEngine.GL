@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using ZonerEngine.GL.Components;
+using ZonerEngine.GL.Input;
 
 namespace ZonerEngine.GL.Entities
 {
@@ -20,6 +21,8 @@ namespace ZonerEngine.GL.Entities
     public float Layer { get; set; }
 
     public float ClickLayer => Layer;
+
+    public virtual Rectangle ClickRectangle { get; }
 
     public string Tag { get; set; }
 
@@ -48,8 +51,17 @@ namespace ZonerEngine.GL.Entities
       Entities.Clear();
     }
 
-    public virtual void Update(GameTime gameTime)
+    public void Update(GameTime gameTime)
     {
+      if (GameMouse.Intersects(ClickRectangle, true))
+      {
+        GameMouse.AddObject(this);
+      }
+      else
+      {
+        GameMouse.ClickableObjects.Remove(this);
+      }
+
       foreach (var component in Components)
         component.Update(gameTime);
 
@@ -57,7 +69,7 @@ namespace ZonerEngine.GL.Entities
         entity.Update(gameTime);
     }
 
-    public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
       foreach (var component in Components)
         component.Draw(gameTime, spriteBatch);
