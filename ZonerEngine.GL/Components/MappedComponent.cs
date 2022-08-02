@@ -64,6 +64,14 @@ namespace ZonerEngine.GL.Components
       }
     }
 
+    public Point Point
+    {
+      get
+      {
+        return new Point(X, Y);
+      }
+    }
+
     #endregion
 
     public MappedComponent(Entity parent, char mapChar, Func<Rectangle> getRectangle) : base(parent)

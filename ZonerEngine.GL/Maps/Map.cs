@@ -9,6 +9,8 @@ namespace ZonerEngine.GL.Maps
 {
   public class Map
   {
+    private Dictionary<Point, KeyValuePair<char, Func<bool>>> _waitingPoints = new Dictionary<Point, KeyValuePair<char, Func<bool>>>();
+
     public char[,] Data { get; private set; }
 
     public int Width => Data.GetLength(1);
@@ -46,10 +48,18 @@ namespace ZonerEngine.GL.Maps
       }
     }
 
-    public void Add(MappedComponent obj)
+    public void Add(MappedComponent obj, Func<bool> triggerActive = null)
     {
       if (Collides(obj))
       {
+        return;
+      }
+
+      // If we've got a condition that triggers the object to appear on the map,
+      //   we add it to a dictionary then check it each frame
+      if (triggerActive != null)
+      {
+        _waitingPoints.Add(obj.Point, new KeyValuePair<char, Func<bool>>(obj.MapChar, triggerActive));
         return;
       }
 
@@ -58,6 +68,24 @@ namespace ZonerEngine.GL.Maps
         for (int x = obj.X; x < obj.Right; x++)
         {
           Data[y, x] = obj.MapChar;
+        }
+      }
+    }
+
+    public void Update()
+    {
+      for (int i = 0; i < _waitingPoints.Count; i++)
+      {
+        var current = _waitingPoints.ElementAt(i);
+        if (current.Value.Value())
+        {
+          var x = current.Key.X;
+          var y = current.Key.Y;
+          var c = current.Value.Key;
+
+          Data[y, x] = c;
+          _waitingPoints.Remove(current.Key);
+          i--;
         }
       }
     }
