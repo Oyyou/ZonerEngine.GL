@@ -57,6 +57,23 @@ namespace ZonerEngine.GL
         rect.Width / amount,
         rect.Height / amount);
     }
+    public static Rectangle Multiply(this Rectangle rect, int amount)
+    {
+      return new Rectangle(
+        rect.X * amount,
+        rect.Y * amount,
+        rect.Width * amount,
+        rect.Height * amount);
+    }
+
+    public static Rectangle ToRectangle(this Vector2 position, int width, int height)
+    {
+      return new Rectangle(
+        (int)position.X,
+        (int)position.Y,
+        width,
+        height);
+    }
 
     public static Point Multiply(this Point point, int amount)
     {
