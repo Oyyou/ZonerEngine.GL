@@ -84,9 +84,9 @@ namespace ZonerEngine.GL.Maps
       return path;
     }
 
-    public List<Point> GetPathNextTo(Point start, Point end)
+    public List<Point> GetPathNextTo(Point start, Point end, bool includeCorners = false)
     {
-      var neighbours = GetNeighbours(end);
+      var neighbours = GetNeighbours(end, includeCorners);
       var results = neighbours.Select(c => GetPath(start, c));
 
       if (results.Count() == 0)
@@ -95,7 +95,7 @@ namespace ZonerEngine.GL.Maps
       return results.OrderBy(c => c.Count()).FirstOrDefault();
     }
 
-    private List<Point> GetNeighbours(Point point)
+    private List<Point> GetNeighbours(Point point, bool includeCorners = false)
     {
       var x = point.X;
       var y = point.Y;
@@ -113,6 +113,21 @@ namespace ZonerEngine.GL.Maps
 
       if (y + 1 < _map.Height)
         result.Add(new Point(x, y + 1));
+
+      if (includeCorners)
+      {
+        if (x - 1 >= 0 && y - 1 >= 0) // Top-left
+          result.Add(new Point(x - 1, y - 1));
+
+        if (x + 1 < _map.Width && y - 1 >= 0) // Top-right
+          result.Add(new Point(x + 1, y - 1));
+
+        if (x + 1 < _map.Width && y + 1 < _map.Height) // Vottom-right
+          result.Add(new Point(x + 1, y + 1));
+
+        if (x - 1 >= 0 && y + 1 < _map.Height) // Bottom-left
+          result.Add(new Point(x - 1, y + 1));
+      }
 
       for (int i = 0; i < result.Count; i++)
       {
