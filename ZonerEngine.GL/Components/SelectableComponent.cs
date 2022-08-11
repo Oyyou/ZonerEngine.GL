@@ -55,7 +55,7 @@ namespace ZonerEngine.GL.Components
       if (GetRectangle != null)
         Rectangle = GetRectangle();
 
-      if (GameMouse.Intersects(Rectangle))
+      if (GameMouse.Intersects(Rectangle) && this.Parent.IsClickable)
       {
         OnHover?.Invoke();
         IsHover = true;

@@ -28,6 +28,14 @@ namespace ZonerEngine.GL.Entities
 
     public Dictionary<string, dynamic> AdditionalProperties { get; set; } = new Dictionary<string, dynamic>();
 
+    public bool IsClickable
+    {
+      get
+      {
+        return GameMouse.ValidObject == this;
+      }
+    }
+
     public Entity()
     {
 
