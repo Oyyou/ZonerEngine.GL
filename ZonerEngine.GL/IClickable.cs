@@ -7,5 +7,7 @@ namespace ZonerEngine.GL
     Rectangle ClickRectangle { get; }
 
     float ClickLayer { get; }
+
+    bool ClickIsVisible { get; }
   }
 }

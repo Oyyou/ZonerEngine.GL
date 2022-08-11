@@ -22,6 +22,8 @@ namespace ZonerEngine.GL.Entities
 
     public float ClickLayer => Layer;
 
+    public virtual bool ClickIsVisible => true;
+
     public virtual Rectangle ClickRectangle { get; }
 
     public string Tag { get; set; }

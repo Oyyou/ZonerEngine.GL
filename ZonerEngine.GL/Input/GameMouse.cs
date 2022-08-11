@@ -25,7 +25,9 @@ namespace ZonerEngine.GL.Input
     {
       get
       {
-        return ClickableObjects.OrderBy(c => c.ClickLayer).LastOrDefault();
+        return ClickableObjects
+          .Where(c => c.ClickIsVisible)
+          .OrderBy(c => c.ClickLayer).LastOrDefault();
       }
     }
 
@@ -165,6 +167,7 @@ namespace ZonerEngine.GL.Input
 
     public static void Update(GameTime gameTime)
     {
+      GameMouse.Clear();
       _previouseMouse = _currentMouse;
       _currentMouse = Mouse.GetState();
     }
@@ -175,6 +178,11 @@ namespace ZonerEngine.GL.Input
         return RectangleWithCamera.Intersects(rectangle);
 
       return Rectangle.Intersects(rectangle);
+    }
+
+    public static void Clear()
+    {
+      GameMouse.ClickableObjects.Clear();
     }
   }
 }
